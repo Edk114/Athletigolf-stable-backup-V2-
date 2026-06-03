@@ -1,0 +1,78 @@
+import { useState } from "react";
+
+export default function CreateSplit() {
+  const [days, setDays] = useState([
+    "Push",
+    "Pull",
+    "Legs",
+  ]);
+
+  const [newDay, setNewDay] = useState("");
+
+  const addDay = () => {
+    if (newDay.trim() !== "") {
+      setDays([...days, newDay]);
+      setNewDay("");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#ece8e1] p-8 md:p-12">
+
+      <div className="max-w-5xl mx-auto">
+
+        <div className="mb-12">
+          <p className="uppercase tracking-[0.25em] text-xs text-black/50 mb-4">
+            Fitness
+          </p>
+
+          <h1 className="text-5xl font-semibold mb-4">
+            Create Your Split
+          </h1>
+
+          <p className="text-black/60 text-lg">
+            Build your training split so AthletiGolf can personalise workout tracking and progression.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-black/5">
+
+          <div className="flex gap-4 mb-8">
+            <input
+              type="text"
+              placeholder="Add training day"
+              value={newDay}
+              onChange={(e) => setNewDay(e.target.value)}
+              className="flex-1 border border-black/10 rounded-2xl px-5 py-4 outline-none focus:border-black"
+            />
+
+            <button
+              onClick={addDay}
+              className="bg-[#111827] text-white px-8 rounded-2xl hover:scale-105 transition"
+            >
+              Add
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+
+            {days.map((day, index) => (
+              <div
+                key={index}
+                className="bg-[#ece8e1] rounded-2xl p-6 flex items-center justify-between"
+              >
+                <h3 className="text-2xl font-semibold">
+                  {day}
+                </h3>
+
+                <button className="text-black/50 hover:text-red-500 transition">
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
